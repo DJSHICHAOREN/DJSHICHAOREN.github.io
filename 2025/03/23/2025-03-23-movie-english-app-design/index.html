@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>想法到架构：为什么要做看电影学英语 App？整体架构怎么设计？ | 行知，知行</title><meta name="author" content="吕务达"><meta name="copyright" content="吕务达"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="天气与目标今天窗外下着小雨，适合坐下来把想法捋清楚。 我决定做一个 Android App，它的功能很简单：你在手机上打开 Netflix 或本地播放器看电影，屏幕底部出现一条半透明字幕条，自动识别画面里的英文字幕，标出你不认识的高难度词汇；点击单词可以看解释和词根词缀拆解，点击句子开头的红点看到整句翻译和语法分析；遇到怎么都想不通的句子，上滑展开一个对话框，直接跟内置的 AI 语言模型对话请教。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="想法到架构：为什么要做看电影学英语 App？整体架构怎么设计？">
+<meta property="og:url" content="http://example.com/2025/03/23/2025-03-23-movie-english-app-design/index.html">
+<meta property="og:site_name" content="行知，知行">
+<meta property="og:description" content="天气与目标今天窗外下着小雨，适合坐下来把想法捋清楚。 我决定做一个 Android App，它的功能很简单：你在手机上打开 Netflix 或本地播放器看电影，屏幕底部出现一条半透明字幕条，自动识别画面里的英文字幕，标出你不认识的高难度词汇；点击单词可以看解释和词根词缀拆解，点击句子开头的红点看到整句翻译和语法分析；遇到怎么都想不通的句子，上滑展开一个对话框，直接跟内置的 AI 语言模型对话请教。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-03-23T01:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-07T09:18:26.150Z">
+<meta property="article:author" content="吕务达">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="架构设计">
+<meta property="article:tag" content="OCR">
+<meta property="article:tag" content="llama">
+<meta property="article:tag" content="英语学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "想法到架构：为什么要做看电影学英语 App？整体架构怎么设计？",
+  "url": "http://example.com/2025/03/23/2025-03-23-movie-english-app-design/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-03-23T01:00:00.000Z",
+  "dateModified": "2026-06-07T09:18:26.150Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "吕务达",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/03/23/2025-03-23-movie-english-app-design/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '想法到架构：为什么要做看电影学英语 App？整体架构怎么设计？',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">行知，知行</span></a><a class="nav-page-title" href="/"><span class="site-name">想法到架构：为什么要做看电影学英语 App？整体架构怎么设计？</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">想法到架构：为什么要做看电影学英语 App？整体架构怎么设计？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-03-23T01:00:00.000Z" title="Created 2025-03-23 09:00:00">2025-03-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-06-07T09:18:26.150Z" title="Updated 2026-06-07 17:18:26">2026-06-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/">电影英语助手</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="天气与目标"><a href="#天气与目标" class="headerlink" title="天气与目标"></a>天气与目标</h2><p>今天窗外下着小雨，适合坐下来把想法捋清楚。</p>
+<p>我决定做一个 Android App，它的功能很简单：<strong>你在手机上打开 Netflix 或本地播放器看电影，屏幕底部出现一条半透明字幕条，自动识别画面里的英文字幕，标出你不认识的高难度词汇；点击单词可以看解释和词根词缀拆解，点击句子开头的红点看到整句翻译和语法分析；遇到怎么都想不通的句子，上滑展开一个对话框，直接跟内置的 AI 语言模型对话请教。</strong></p>
+<p>今天的目标：<strong>把这个想法变成一份能落地的架构设计文档。</strong></p>
+<hr>
+<h2 id="为什么要做这个-App？"><a href="#为什么要做这个-App？" class="headerlink" title="为什么要做这个 App？"></a>为什么要做这个 App？</h2><p>很多人喜欢通过看电影学英语，但实际操作起来很痛苦：</p>
+<ol>
+<li><strong>字幕一闪而过</strong>，来不及查词</li>
+<li><strong>切到词典 App</strong> 查词，电影被打断</li>
+<li><strong>很多词是俚语、口语</strong>，常规词典查不到</li>
+<li><strong>知道单词意思但看不懂整句</strong>——语法结构不懂</li>
+<li><strong>不知道哪些词应该重点学</strong>——屏幕上词汇太多</li>
+</ol>
+<p>市面上有一些 App 做字幕翻译，但它们都有一个致命问题：<strong>依赖网络</strong>。在地铁上、飞机上、国外旅行时，没网就废了。</p>
+<p>所以我决定做一个<strong>完全离线的</strong>解决方案——OCR 模型本地识别字幕，AI 语言模型本地运行在手机上。</p>
+<hr>
+<h2 id="需求拆解"><a href="#需求拆解" class="headerlink" title="需求拆解"></a>需求拆解</h2><p>把想法拆成 8 条具体需求：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 一个 Android 应用</span><br><span class="line">2. 帮助使用者看电影学英语</span><br><span class="line">3. 显示悬浮窗覆盖在视频 App 上，OCR 识别屏幕上显示的英文字幕</span><br><span class="line">4. OCR 算法是内置在应用中的深度学习模型，模型自己训练</span><br><span class="line">5. 制作训练数据集的工具</span><br><span class="line">6. 通过识别出的字幕内容在字幕文件中查找，定位播放位置</span><br><span class="line">7. 应用内置一个 AI 语言模型，用户不理解时跟 AI 对话请教</span><br><span class="line">8. 包含对 OCR 模型和语言模型蒸馏、剪枝、量化的逻辑代码</span><br></pre></td></tr></table></figure>
+
+<p>这些需求其实描述了 <strong>5 个独立子系统</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>子系统</th>
+<th>干什么</th>
+<th>复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Android 悬浮窗主应用</td>
+<td>屏幕捕获、OCR 推理、字幕匹配、AI 对话、UI 交互</td>
+<td>高</td>
+</tr>
+<tr>
+<td>数据标注工具</td>
+<td>框选截图中字幕区域、录入对应文本、导出训练集</td>
+<td>中高</td>
+</tr>
+<tr>
+<td>OCR 模型训练管线</td>
+<td>CRNN 训练、知识蒸馏、剪枝、量化、导出 TFLite</td>
+<td>很高</td>
+</tr>
+<tr>
+<td>llama 语言模型集成</td>
+<td>JNI 桥接、llama.cpp 编译、GGUF 量化、对话管理</td>
+<td>高</td>
+</tr>
+<tr>
+<td>模型优化管线</td>
+<td>两个模型的蒸馏&#x2F;剪枝&#x2F;量化代码</td>
+<td>高</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h3 id="整体架构图"><a href="#整体架构图" class="headerlink" title="整体架构图"></a>整体架构图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">┌──────────────────────────────────────────────┐</span><br><span class="line">│                  Android 手机                  │</span><br><span class="line">│                                              │</span><br><span class="line">│  ┌──────────┐   ┌──────────┐   ┌──────────┐ │</span><br><span class="line">│  │ 视频 App  │   │ 悬浮窗    │   │ 标注工具  │ │</span><br><span class="line">│  │(Netflix等)│   │(主 App)   │   │(独立 App) │ │</span><br><span class="line">│  └────┬─────┘   └────┬─────┘   └──────────┘ │</span><br><span class="line">│       │              │                       │</span><br><span class="line">│       │  屏幕捕获     │                       │</span><br><span class="line">│       │  ←──────────→│                       │</span><br><span class="line">│       │              │                       │</span><br><span class="line">│       │         ┌────┴─────┐                 │</span><br><span class="line">│       │         │ OCR 推理  │  (TFLite, 3MB) │</span><br><span class="line">│       │         └────┬─────┘                 │</span><br><span class="line">│       │              │                       │</span><br><span class="line">│       │         ┌────┴─────┐                 │</span><br><span class="line">│       │         │ 字幕匹配  │                 │</span><br><span class="line">│       │         └────┬─────┘                 │</span><br><span class="line">│       │              │                       │</span><br><span class="line">│       │         ┌────┴─────┐                 │</span><br><span class="line">│       │         │ AI 对话   │  (llama, 1.2GB)│</span><br><span class="line">│       │         └──────────┘                 │</span><br><span class="line">└──────────────────────────────────────────────┘</span><br><span class="line"></span><br><span class="line">         PC / GPU 服务器</span><br><span class="line">  ┌────────────────────────────┐</span><br><span class="line">  │  OCR 训练 + 剪枝 + 量化     │</span><br><span class="line">  │  llama 剪枝 + GGUF 量化     │</span><br><span class="line">  └────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行时数据流"><a href="#运行时数据流" class="headerlink" title="运行时数据流"></a>运行时数据流</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">屏幕画面 → MediaProjection 捕获</span><br><span class="line">    ↓</span><br><span class="line">字幕区域裁剪（底部 1/5）</span><br><span class="line">    ↓</span><br><span class="line">OCR 模型推理 → 纯文本</span><br><span class="line">    ↓</span><br><span class="line">编辑距离模糊匹配 → 定位字幕条目</span><br><span class="line">    ↓</span><br><span class="line">读取预处理缓存（难词列表、翻译、语法）</span><br><span class="line">    ↓</span><br><span class="line">悬浮窗刷新 → 标注难词、显示时间戳</span><br><span class="line">    ↓</span><br><span class="line">用户点击单词/红点 → 弹出解释面板</span><br><span class="line">用户上滑 → llama 对话</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="关键技术决策"><a href="#关键技术决策" class="headerlink" title="关键技术决策"></a>关键技术决策</h2><h3 id="决策-1：模型全内置-vs-按需下载"><a href="#决策-1：模型全内置-vs-按需下载" class="headerlink" title="决策 1：模型全内置 vs 按需下载"></a>决策 1：模型全内置 vs 按需下载</h3><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全内置</td>
+<td>安装即用，无网络依赖</td>
+<td>APK 体积 1.5-2GB</td>
+</tr>
+<tr>
+<td>按需下载</td>
+<td>安装包小</td>
+<td>首次需联网，增加下载模块</td>
+</tr>
+</tbody></table>
+<p><strong>选了全内置。</strong> 因为目标场景就是离线使用，一步到位。</p>
+<h3 id="决策-2：OCR-模型架构选-CRNN"><a href="#决策-2：OCR-模型架构选-CRNN" class="headerlink" title="决策 2：OCR 模型架构选 CRNN"></a>决策 2：OCR 模型架构选 CRNN</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入图片 (H×W×灰度)</span><br><span class="line">    ↓</span><br><span class="line">CNN 卷积层 → 提取视觉特征</span><br><span class="line">    ↓</span><br><span class="line">特征图切分成列 → 序列</span><br><span class="line">    ↓</span><br><span class="line">BiLSTM → 序列建模（上下文依赖）</span><br><span class="line">    ↓</span><br><span class="line">CTC 解码 → 输出字符序列</span><br></pre></td></tr></table></figure>
+
+<p>为什么不用 Transformer 类模型（如 TrOCR）？因为 <strong>CRNN 足够小，量化后只有 3MB，手机推理 &lt;50ms</strong>。TrOCR 动辄几百 MB，不适合嵌入。</p>
+<h3 id="决策-3：语言模型选-Qwen-2-5-1-5B"><a href="#决策-3：语言模型选-Qwen-2-5-1-5B" class="headerlink" title="决策 3：语言模型选 Qwen 2.5 1.5B"></a>决策 3：语言模型选 Qwen 2.5 1.5B</h3><table>
+<thead>
+<tr>
+<th>候选</th>
+<th>中文能力</th>
+<th>体积</th>
+<th>速度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Llama 3.2 1B</td>
+<td>弱</td>
+<td>小</td>
+<td>快</td>
+</tr>
+<tr>
+<td>Gemma 2 2B</td>
+<td>一般</td>
+<td>中</td>
+<td>中</td>
+</tr>
+<tr>
+<td>Phi-3.5 mini 3.8B</td>
+<td>弱</td>
+<td>大</td>
+<td>慢</td>
+</tr>
+<tr>
+<td><strong>Qwen 2.5 1.5B</strong></td>
+<td><strong>强</strong></td>
+<td><strong>1.2GB(Q4)</strong></td>
+<td><strong>10-20 tok&#x2F;s</strong></td>
+</tr>
+</tbody></table>
+<p>解释单词时需要用中文表达，Qwen 是唯一中英双母语的选项。</p>
+<h3 id="决策-4：屏幕捕获用-MediaProjection-API"><a href="#决策-4：屏幕捕获用-MediaProjection-API" class="headerlink" title="决策 4：屏幕捕获用 MediaProjection API"></a>决策 4：屏幕捕获用 MediaProjection API</h3><p>Android 获取其他 App 画面只有两条路：</p>
+<ul>
+<li>MediaProjection：系统弹窗授权，合法稳定</li>
+<li>AccessibilityService：无感获取，但 Google Play 政策收紧</li>
+</ul>
+<p>选了 MediaProjection 作为默认方案，AccessibilityService 作为可选增强。</p>
+<hr>
+<h2 id="悬浮窗-UI-设计"><a href="#悬浮窗-UI-设计" class="headerlink" title="悬浮窗 UI 设计"></a>悬浮窗 UI 设计</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">┌────────────────────────┐</span><br><span class="line">│                        │</span><br><span class="line">│      🎬 电影画面        │</span><br><span class="line">│                        │</span><br><span class="line">│  ┌─OCR 识别区域──────┐ │</span><br><span class="line">│  │ &quot;I gotta get out │ │</span><br><span class="line">│  │  of here before  │ │</span><br><span class="line">│  │  sundown&quot;        │ │</span><br><span class="line">│  └──────────────────┘ │</span><br><span class="line">│                        │</span><br><span class="line">│ ┌────────────────────┐ │</span><br><span class="line">│ │🔴 I gotta get out  │ │ ← 半透明字幕条</span><br><span class="line">│ │   of here before   │ │   黄色=难词</span><br><span class="line">│ │   sundown  00:32:15│ │   蓝色=已掌握</span><br><span class="line">│ └────────────────────┘ │   🔴 点击=整句分析</span><br><span class="line">└────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p>交互规则：</p>
+<ul>
+<li>点击黄色单词 → 弹出解释气泡（音标 + 释义 + 词根词缀）</li>
+<li>点击 🔴 红点 → 弹出整句面板（翻译 + 逐词 + 语法）</li>
+<li>上滑字幕条 → 展开 llama 对话面板</li>
+<li>右滑 → 临时隐藏</li>
+</ul>
+<hr>
+<h2 id="用户词库自适应算法"><a href="#用户词库自适应算法" class="headerlink" title="用户词库自适应算法"></a>用户词库自适应算法</h2><p>核心思想：<strong>用户的行为是最真实的反馈。</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">点击查词 → 立即跳最高级（用户真的不认识，+2.5 级/次）</span><br><span class="line">展示但没点 → 缓慢降低（可能认识了，-0.5 级/次）</span><br><span class="line">加入生词本 → 锁定最高级，永不自动降</span><br><span class="line">标记已掌握 → 立即归零</span><br><span class="line"></span><br><span class="line">新用户 → llama 通用判断 → 标记偏多</span><br><span class="line">用 10 部电影后 → 个人词库精准 → 只标真不会的词</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>这篇文章把想法变成了架构图、数据流图、决策表。</p>
+<p>这个项目的代码量不小——4 个子系统，30 多个源文件。接下来我会一篇一篇记录每个模块是怎么做出来的，每一篇都包含<strong>原理 + 可执行的步骤 + 代码详解 + 踩过的坑</strong>。</p>
+<p>如果你也在做一个类似的 App，或者想在 Android 上跑深度学习模型，这个系列也许能帮你少走一些弯路。</p>
+<blockquote>
+<p>细雨湿衣看不见<br>闲花落地听无声<br>架构初成心已定<br>明朝动手续新程  </p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">吕务达</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2025/03/23/2025-03-23-movie-english-app-design/">http://example.com/2025/03/23/2025-03-23-movie-english-app-design/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Android/">Android</a><a class="post-meta__tags" href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a><a class="post-meta__tags" href="/tags/OCR/">OCR</a><a class="post-meta__tags" href="/tags/llama/">llama</a><a class="post-meta__tags" href="/tags/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/">英语学习</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/04/05/2025-04-05-android-project-scaffold/" title="Android 项目搭建：Compose + Room + TFLite + KSP 依赖配置"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Android 项目搭建：Compose + Room + TFLite + KSP 依赖配置</div></div><div class="info-2"><div class="info-item-1">天气与目标四月的早晨还有点凉。今天是清明假期第一天，正好有时间把项目骨架搭起来。 我们的 App 最终需要用到 Jetpack Compose 做 UI、Room 做数据库、TFLite 做 OCR 推理、llama.cpp 通过 JNI 做语言模型推理、Kotlin 协程做异步任务。今天的任务就是把这些依赖正确地配置到一个 Android 项目里，让它们不打架。 目标是：运行 ./gradlew :app:assembleDebug 不报错。  第一步：创建 Gradle 构建文件1.1 根目录 build.gradle.kts在项目根目录 D:\RY\projects\VideoAssist\ 创建 build.gradle.kts： 12345678910111213141516// build.gradle.kts（项目根目录）// 这段代码声明了三个 Gradle 插件，但 apply false 表示不在此处应用// 各子模块（如 :app）会在自己的 build.gradle.kts 中单独应用plugins &#123;    // Android 构建插件，8....</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/07/21/2025-07-21-ctc-decoding-kotlin/" title="CTC 贪心解码在 Kotlin 的重写与字符集映射"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-21</div><div class="info-item-2">CTC 贪心解码在 Kotlin 的重写与字符集映射</div></div><div class="info-2"><div class="info-item-1">天气与目标七月的深圳，午后暴雨来得快去得也快，空气里混着湿热和泥土味。 前几篇我们走通了模型推理的完整链路：Bitmap 预处理、TFLite Interpreter 初始化、CRNN 模型导出。但推理出来的东西——一个 (64, 41) 的浮点数矩阵——距离人类可读的”一行字幕文本”还差最后一步：CTC 解码。 今天的目标：把 CTC 贪心解码算法从 Python 原封不动地重写到 Kotlin，弄清楚为什么必须自己写而不用 TFLite 内置算子，把字符集映射、大小写处理、blank token 的坑一个一个踩平。  一、为什么不直接用 TFLite 内置的 CTC 解码？1.1 理想情况：模型自带解码 Op在 Python 训练侧，CTC 解码只不过是几行代码： 123456789import torchimport torch.nn.functional as F# log_probs: (T, N, C) — 时间步, 批次, 类别log_probs = torch.randn(64, 1, 41).log_softmax(2)# 一步到位decoded, _ = F....</div></div></div></a><a class="pagination-related" href="/2025/04/18/2025-04-18-floating-window-overlay/" title="Android 悬浮窗实战：Foreground Service + WindowManager 实现底部字幕条"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-18</div><div class="info-item-2">Android 悬浮窗实战：Foreground Service + WindowManager 实现底部字幕条</div></div><div class="info-2"><div class="info-item-1">天气与目标四月中旬，杨絮开始飘了。 今天的目标：在 Android 上创建一个悬浮窗服务，它能在任何 App 上面显示一个半透明横条，并且在通知栏保持存活。 这需要三个东西配合：  Foreground Service——让系统知道这是一个重要的后台服务，不要随便杀 WindowManager——在屏幕上添加一个不受 Activity 限制的 View 通知渠道——Android 8.0+ Foreground Service 必须关联通知   原理为什么用 Foreground Service 而不是普通 Service？12普通 Service  →  系统内存紧张时随时可能被杀Foreground Service  →  有通知栏图标，系统认为用户知道它在运行，不会轻易杀  我们的字幕条需要持续在后台运行——用户可能看 2 小时电影，这期间 Service 不能死。用 Foreground Service 是唯一可靠方案。 WindowManager 添加悬浮窗的机制1234567WindowManager.addView(view, params)    ↓params....</div></div></div></a><a class="pagination-related" href="/2025/12/14/2025-12-14-ndk-cross-compile/" title="llama.cpp 交叉编译环境搭建：NDK 版本选择与工具链配置"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-12-14</div><div class="info-item-2">llama.cpp 交叉编译环境搭建：NDK 版本选择与工具链配置</div></div><div class="info-2"><div class="info-item-1">天气与目标十二月中旬，冬至未至，暖气已开。这种天气最适合窝在显示器前做一件最不”开发”的开发工作——搭环境。 剪枝后的 Qwen 2.5 模型要跑到 Android 上，必须把 llama.cpp 编译成 arm64-v8a 的 .so 库。这意味着在 Windows x86_64 上交叉编译出 Android ARM64 的原生代码。今天的目标：用 NDK 在 Windows 上搭好交叉编译环境，把 llama.cpp 编成 libllama.a，再配好 JNI 桥接层的 CMakeLists.txt。  原理：什么是交叉编译？为什么这么麻烦？交叉编译的本质123456┌─────────────────────────────┐     ┌─────────────────────────────┐│   编译机 (Host)              │     │   目标机 (Target)            ││   Windows x86_64            │ ──→ │   Android ARM64 (aarch64)   ││   CPU: In...</div></div></div></a><a class="pagination-related" href="/2026/01/23/2026-01-23-gguf-inference-optimization/" title="GGUF Q4 量化模型的推理速度与内存优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-23</div><div class="info-item-2">GGUF Q4 量化模型的推理速度与内存优化</div></div><div class="info-2"><div class="info-item-1">天气与目标一月下旬，深圳终于有了点冬天的样子——室外 12 度，手机总算不烫手了。正好趁这个”凉爽期”把推理性能的底摸清楚。 上一篇我们把 llama.cpp 编译成了 JNI 库，模型能在手机上跑了。但”能跑”和”跑得好”之间隔着一整条优化链。今天的目标：系统性地测一遍 Q4_K_M 量化模型的推理速度和内存占用，找到最优的 n_gpu_layers、n_ctx、batch_size 配置组合。  原理GGUF 量化类型对比GGUF 格式支持多种量化精度，核心思路是把 FP32&#x2F;FP16 的浮点权重映射到低位宽的整数空间：    量化类型 位宽 体积（1.5B） 质量损失 推理速度 适用场景    FP16 16bit ~2.8GB 无 慢（需 GPU） 服务端   Q8_0 8bit ~1.4GB 极小 中等 高端手机   Q5_K_M 5bit ~1.0GB 很小 快 中端手机   Q4_K_M 4bit ~900MB 可接受 快 目标场景   Q3_K_M 3bit ~750MB 明显 很快 低端手机   IQ2_XXS 2bit ~500MB 较大 最快 极限...</div></div></div></a><a class="pagination-related" href="/2025/10/01/2025-10-01-annotation-tool/" title="自制 Android 标注工具：Canvas 框选 + Room 存储 + JSON 导出"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-01</div><div class="info-item-2">自制 Android 标注工具：Canvas 框选 + Room 存储 + JSON 导出</div></div><div class="info-2"><div class="info-item-1">天气与目标十月初，国庆假期。别人在景区排队，我在屏幕前划框。 做 OCR 第一步不是训练模型，而是攒数据。手机截图一把抓，字幕区域全靠手标。今天的目标：从零搭建一个 Android 标注工具，左侧画框、右侧打字、一键导出标准化数据集。核心逻辑就四个字：画框、存库、导出、迭代。  （代码文件路径：project&#x2F;annotation-tool&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;movieenglish&#x2F;annotator&#x2F;{AnnotatorView.kt, MainActivity.kt, export&#x2F;DatasetExporter.kt, data&#x2F;{AnnotationRecord.kt, AnnotationDao.kt, AnnotationDatabase.kt}}）原理标注工具的闭环逻辑1234567┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐│ 截图收集  │ →  │ 框选标注  ...</div></div></div></a><a class="pagination-related" href="/2025/08/14/2025-08-14-llama-jni-android/" title="llama.cpp 编译成 JNI 库：在 Android 上跑大模型的第一步"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-14</div><div class="info-item-2">llama.cpp 编译成 JNI 库：在 Android 上跑大模型的第一步</div></div><div class="info-2"><div class="info-item-1">天气与目标八月中旬，立秋已过，天气却像个不肯退烧的病人——CPU 温度降不下来，人也不想出门。 今天的任务看似”就一个文件”——把 llama.cpp 编译成 JNI 动态库，让 Kotlin 能直接调 llama 的 API，在手机上跑文本生成。 实际上，这一步是 C++ 和 Java&#x2F;Kotlin 之间的翻译层，搭好了就是桥，搭不好就是墙。我们从编译到调试，一步步来。  原理为什么选 llama.cpp跑大模型推理，移动端的选择并不多：    方案 体积 推理速度 模型格式 生态    MLC-LLM 需要 TVM Unity 快（编译优化） MLC 专用格式 较小   llama.cpp 单文件 C++，无依赖 中等（CPU 为主） GGUF 通用格式 极丰富   ExecuTorch 依赖 PyTorch 生态 中等 .pte 格式 较新   Transformers (Java) 极大 慢 HuggingFace 格式 丰富但重   对”电影英语助手”这个场景——需要在后台静默分析字幕并做出实时反应——我们有三个硬约束：  不能依赖网络——翻译和总结必须在本地...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">吕务达</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">98</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A9%E6%B0%94%E4%B8%8E%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">天气与目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9A%E8%BF%99%E4%B8%AA-App%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">为什么要做这个 App？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E6%8B%86%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">需求拆解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.</span> <span class="toc-text">架构设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="toc-number">4.1.</span> <span class="toc-text">整体架构图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-number">4.2.</span> <span class="toc-text">运行时数据流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%86%B3%E7%AD%96"><span class="toc-number">5.</span> <span class="toc-text">关键技术决策</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B3%E7%AD%96-1%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%85%A8%E5%86%85%E7%BD%AE-vs-%E6%8C%89%E9%9C%80%E4%B8%8B%E8%BD%BD"><span class="toc-number">5.1.</span> <span class="toc-text">决策 1：模型全内置 vs 按需下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B3%E7%AD%96-2%EF%BC%9AOCR-%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84%E9%80%89-CRNN"><span class="toc-number">5.2.</span> <span class="toc-text">决策 2：OCR 模型架构选 CRNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B3%E7%AD%96-3%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E9%80%89-Qwen-2-5-1-5B"><span class="toc-number">5.3.</span> <span class="toc-text">决策 3：语言模型选 Qwen 2.5 1.5B</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B3%E7%AD%96-4%EF%BC%9A%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E7%94%A8-MediaProjection-API"><span class="toc-number">5.4.</span> <span class="toc-text">决策 4：屏幕捕获用 MediaProjection API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%82%AC%E6%B5%AE%E7%AA%97-UI-%E8%AE%BE%E8%AE%A1"><span class="toc-number">6.</span> <span class="toc-text">悬浮窗 UI 设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%AF%8D%E5%BA%93%E8%87%AA%E9%80%82%E5%BA%94%E7%AE%97%E6%B3%95"><span class="toc-number">7.</span> <span class="toc-text">用户词库自适应算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text">小结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/2026-02-12-full-pipeline-wrapup/" title="全链路打通：从标注数据到手机上跑起来的完整复盘">全链路打通：从标注数据到手机上跑起来的完整复盘</a><time datetime="2026-02-12T01:00:00.000Z" title="Created 2026-02-12 09:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/02/2026-02-02-thermal-throttling/" title="发热降频与功耗控制：移动端 LLM 推理的生存法则">发热降频与功耗控制：移动端 LLM 推理的生存法则</a><time datetime="2026-02-02T01:00:00.000Z" title="Created 2026-02-02 09:00:00">2026-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/23/2026-01-23-gguf-inference-optimization/" title="GGUF Q4 量化模型的推理速度与内存优化">GGUF Q4 量化模型的推理速度与内存优化</a><time datetime="2026-01-23T01:00:00.000Z" title="Created 2026-01-23 09:00:00">2026-01-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/13/2026-01-13-native-pointer-lifecycle/" title="Native 指针生命周期：assets 拷贝 GGUF、模型加载与安全释放">Native 指针生命周期：assets 拷贝 GGUF、模型加载与安全释放</a><time datetime="2026-01-13T01:00:00.000Z" title="Created 2026-01-13 09:00:00">2026-01-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/03/2026-01-03-jni-function-registration/" title="JNI 函数注册与 Kotlin external 声明：方法签名与类型映射">JNI 函数注册与 Kotlin external 声明：方法签名与类型映射</a><time datetime="2026-01-03T01:00:00.000Z" title="Created 2026-01-03 09:00:00">2026-01-03</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 吕务达</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5-b1"></script><script src="/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

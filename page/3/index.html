@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>行知，知行</title><meta name="author" content="吕务达"><meta name="copyright" content="吕务达"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="行知，知行">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="行知，知行">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:author" content="吕务达">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5-b1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '行知，知行',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">行知，知行</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">行知，知行</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/11/2025-07-11-bitmap-preprocessing/" title="Bitmap 到 Tensor：Android 上的图像预处理与零拷贝优化">Bitmap 到 Tensor：Android 上的图像预处理与零拷贝优化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-07-11T01:00:00.000Z" title="Created 2025-07-11 09:00:00">2025-07-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/">电影英语助手</a></span></div><div class="content">天气与目标七月中的午后，窗外知了声此起彼伏。 今天的目标听起来很简单：把一张 Android Bitmap 转成 OCR 模型要吃的 ByteBuffer Tensor。 但实际上要做好这件事（正确的灰度计算、正确的归一化范围、避免额外的内存分配），每一步都有坑。  原理OCR 模型期望的输入格式12345678屏幕原始 Bitmap（RGBA, 1080×216 字幕区域）         ↓1. 灰度化：RGBA → 单通道灰度值2. 缩放：缩到固定高度 32px，宽度等比例3. 归一化：像素值 0-255 → 浮点数 [-1, 1] 或 [0, 1]4. 内存布局：转换为 ByteBuffer（C 序，float32）         ↓模型输入：(1, 1, 32, ~100)  ← (N, C, H, W)  关键决策点   问题 选项 推荐    灰度公式 简单平均 (R+G+B)/3 vs 加权 0.299R+0.587G+0.114B 加权（人眼对不同颜色敏感度不同）   归一化范围 [0, 1] vs [-1, 1] 与训练时一致（本文用 [-1,1]）   内...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/02/2025-07-02-gpu-delegate/" title="GPU Delegate 加速与 CPU 回退策略：TFLite 推理的性能博弈">GPU Delegate 加速与 CPU 回退策略：TFLite 推理的性能博弈</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-07-02T01:00:00.000Z" title="Created 2025-07-02 09:00:00">2025-07-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/">电影英语助手</a></span></div><div class="content">天气与目标七月初，手机都开始发烫了。 OCR 识别每次推理需要 50-150ms（CPU），但我们的目标是 &lt; 50ms。今天研究 TFLite 的 GPU 加速方案，以及 GPU 不可用时如何优雅回退到 CPU。  原理TFLite 的三种推理后端12345678910┌────────────────────────────────────────────┐│              TFLite Runtime                 ││                                             ││  ┌──────────┐  ┌──────────┐  ┌──────────┐  ││  │   CPU    │  │   GPU    │  │  NNAPI   │  ││  │ (默认)   │  │(OpenGL ES)│  │(芯片厂商) │  ││  └──────────┘  └──────────┘  └──────────┘  ││   最稳定       最快(2-5x)     依赖厂商实现   ││...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/06/23/2025-06-23-tflite-interpreter/" title="TFLite Interpreter 在 Android 上的初始化与线程安全实战">TFLite Interpreter 在 Android 上的初始化与线程安全实战</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-06-23T01:00:00.000Z" title="Created 2025-06-23 09:00:00">2025-06-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/">电影英语助手</a></span></div><div class="content">天气与目标六月末的深圳，闷热得让人不想出门。空调房里敲代码，键盘声和窗外的蝉鸣交错。 前几篇我们走通了 OCR 模型（CRNN）的架构设计，也把模型成功转换成了 tflite 格式。但模型文件放进 assets 只是第一步——真正在 Android 设备上跑起来，还隔着 Interpreter 初始化、线程安全、内存管理 三座山。 今天的目标：用实战的方式把 TFLite Interpreter 在 Android 上的坑走一遍，每个坑都给出能跑通的代码。  一、Interpreter 初始化到底有多重？1.1 先看一段”初学者代码”123456789101112131415// ❌ 错误的做法：每次识别都 new 一个 Interpreterclass NaiveOcrEngine(private val context: Context) &#123;    fun recognize(bitmap: Bitmap): String &#123;        // 加载模型——每次调用都走一遍 IO + 解析        val modelBuffer = loadMod...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/06/14/2025-06-14-onnx-to-tflite/" title="ONNX 转 TFLite 踩坑实录——算子映射、INT8 量化校准与模型验证">ONNX 转 TFLite 踩坑实录——算子映射、INT8 量化校准与模型验证</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-06-14T01:00:00.000Z" title="Created 2025-06-14 09:00:00">2025-06-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/">电影英语助手</a></span></div><div class="content">天气与目标六月午后的成都，闷热潮湿。窗外下着淅淅沥沥的小雨，打在空调外机上嗒嗒作响。 上篇我们搞定了 CRNN 模型的 PyTorch 实现和 ONNX 导出。但光有 .onnx 文件还不够——Android 端要用的是 .tflite。今天的目标：把 ONNX 模型转成 TFLite，做 INT8 量化，把 33MB 的 FP32 模型压缩到 8MB，并且精度下降控制在 2% 以内。 这条路坑不少，踩过的都记下来。  整体路线图1234PyTorch (.pt) ──→ ONNX (.onnx) ──→ SavedModel ──→ TFLite (.tflite)                      ↑                  ↑              ↑                  export.py        onnx-tf         TF Converter                                   convert         + INT8校准  每一步都有它的坎，下面按顺序讲。  第一步：从 PyTor...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/06/05/2025-06-05-pytorch-to-onnx/" title="PyTorch模型导出ONNX——CRNN序列模型的动态轴、opset版本与算子兼容性">PyTorch模型导出ONNX——CRNN序列模型的动态轴、opset版本与算子兼容性</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-06-05T01:00:00.000Z" title="Created 2025-06-05 09:00:00">2025-06-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/">电影英语助手</a></span></div><div class="content">天气与目标六月了，窗外下着雨，正是适合宅在电脑前折腾模型的好天气。 上一篇我们实现了 CRNN 模型——CNN + BiLSTM + CTC 三段式架构，在 PyTorch 上跑通了训练。但真正要用到 Android 端，必须把它导出为 ONNX，再转成 TFLite。听起来就是一行 torch.onnx.export() 的事——实际上，序列模型的导出暗藏玄机。 今天的目标：把 CRNN 模型从 PyTorch 导出为 ONNX，解决可变宽度、opset 兼容性、LSTM 算子的坑，最终用 onnxruntime 验证结果一致性。  背景：为什么需要 ONNX？我们的部署管线是： 1PyTorch 模型 → ONNX → TFLite → Android 端推理  ONNX（Open Neural Network Exchange）是跨框架的中间表示。它重要的原因是：  解耦训练和部署框架：训练用 PyTorch（灵活、生态好），部署可能是 ONNX Runtime &#x2F; TensorFlow Lite &#x2F; OpenVINO &#x2F; TensorRT。 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/05/14/2025-05-14-crnn-architecture/" title="CRNN 文字识别模型：CNN + BiLSTM + CTC 架构详解">CRNN 文字识别模型：CNN + BiLSTM + CTC 架构详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-05-14T01:00:00.000Z" title="Created 2025-05-14 09:00:00">2025-05-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/">电影英语助手</a></span></div><div class="content">天气与目标五月天，窗外蝉鸣渐起。 之前几篇都在做 Android 侧的基础设施——悬浮窗有了、屏幕捕获有了。但要真正识别画面里的英文字幕，我们需要一个 OCR 模型。 今天的目标：理解并实现 CRNN 架构，它是 OCR 文本识别领域最经典的轻量级方案。  原理：为什么是 CRNN？OCR 问题的本质OCR（Optical Character Recognition）文字识别本质上是一个 图像 → 序列 的转换问题： 12输入：一张包含文字的图片（H × W 像素）输出：一串字符 &quot;hello world&quot;  这跟一般的图片分类不同——输出是变长的序列，不是单个标签。 三种主流方案对比   方案 代表 参数量 速度 适用场景    CRNN CRNN ~5M 快 水平文字，规则排列   Attention-based TrOCR ~300M 慢 弯曲文字，复杂排版   End-to-End Detection DBNet+CRNN ~15M 中 不规则文字区域   我们的场景是电影底部字幕——水平、规则排列、白字黑边。CRNN 绰绰有余，且参数只有 5M，量化...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/05/01/2025-05-01-screen-capture-mediaprojection/" title="用 MediaProjection 捕获屏幕画面，裁剪字幕区域">用 MediaProjection 捕获屏幕画面，裁剪字幕区域</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-05-01T01:00:00.000Z" title="Created 2025-05-01 09:00:00">2025-05-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/">电影英语助手</a></span></div><div class="content">天气与目标五一是劳动者的节日。今天也来”劳动”一下——让悬浮窗能看到手机屏幕上的内容。 上一篇做好的悬浮窗只是一个空壳，现在需要给它装上”眼睛”——通过 Android 的 MediaProjection API 捕获屏幕画面，并裁剪出底部字幕区域，送给 OCR 引擎识别。  原理MediaProjection 工作流程1234567891011用户授权屏幕录制    ↓MediaProjectionManager.getMediaProjection(resultCode, data)    ↓创建 VirtualDisplay（虚拟显示器）    ↓ImageReader 的 Surface 接收画面帧    ↓从 ImageReader 取出 Image → 转 Bitmap    ↓裁剪底部 1/5 → 送给 OCR  为什么用 ImageReader 而不是 MediaRecorder？ MediaRecorder 是录视频用的，拿不到单帧 ImageReader 可以逐帧获取，适合 OCR 场景（不需要实时帧率，2-3 FPS 就够了）  裁剪策略电影字幕通常位于屏幕...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/18/2025-04-18-floating-window-overlay/" title="Android 悬浮窗实战：Foreground Service + WindowManager 实现底部字幕条">Android 悬浮窗实战：Foreground Service + WindowManager 实现底部字幕条</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-18T01:00:00.000Z" title="Created 2025-04-18 09:00:00">2025-04-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/">电影英语助手</a></span></div><div class="content">天气与目标四月中旬，杨絮开始飘了。 今天的目标：在 Android 上创建一个悬浮窗服务，它能在任何 App 上面显示一个半透明横条，并且在通知栏保持存活。 这需要三个东西配合：  Foreground Service——让系统知道这是一个重要的后台服务，不要随便杀 WindowManager——在屏幕上添加一个不受 Activity 限制的 View 通知渠道——Android 8.0+ Foreground Service 必须关联通知   原理为什么用 Foreground Service 而不是普通 Service？12普通 Service  →  系统内存紧张时随时可能被杀Foreground Service  →  有通知栏图标，系统认为用户知道它在运行，不会轻易杀  我们的字幕条需要持续在后台运行——用户可能看 2 小时电影，这期间 Service 不能死。用 Foreground Service 是唯一可靠方案。 WindowManager 添加悬浮窗的机制1234567WindowManager.addView(view, params)    ↓params....</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/05/2025-04-05-android-project-scaffold/" title="Android 项目搭建：Compose + Room + TFLite + KSP 依赖配置">Android 项目搭建：Compose + Room + TFLite + KSP 依赖配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-05T01:00:00.000Z" title="Created 2025-04-05 09:00:00">2025-04-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/">电影英语助手</a></span></div><div class="content">天气与目标四月的早晨还有点凉。今天是清明假期第一天，正好有时间把项目骨架搭起来。 我们的 App 最终需要用到 Jetpack Compose 做 UI、Room 做数据库、TFLite 做 OCR 推理、llama.cpp 通过 JNI 做语言模型推理、Kotlin 协程做异步任务。今天的任务就是把这些依赖正确地配置到一个 Android 项目里，让它们不打架。 目标是：运行 ./gradlew :app:assembleDebug 不报错。  第一步：创建 Gradle 构建文件1.1 根目录 build.gradle.kts在项目根目录 D:\RY\projects\VideoAssist\ 创建 build.gradle.kts： 12345678910111213141516// build.gradle.kts（项目根目录）// 这段代码声明了三个 Gradle 插件，但 apply false 表示不在此处应用// 各子模块（如 :app）会在自己的 build.gradle.kts 中单独应用plugins &#123;    // Android 构建插件，8....</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/23/2025-03-23-movie-english-app-design/" title="想法到架构：为什么要做看电影学英语 App？整体架构怎么设计？">想法到架构：为什么要做看电影学英语 App？整体架构怎么设计？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-03-23T01:00:00.000Z" title="Created 2025-03-23 09:00:00">2025-03-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/">电影英语助手</a></span></div><div class="content">天气与目标今天窗外下着小雨，适合坐下来把想法捋清楚。 我决定做一个 Android App，它的功能很简单：你在手机上打开 Netflix 或本地播放器看电影，屏幕底部出现一条半透明字幕条，自动识别画面里的英文字幕，标出你不认识的高难度词汇；点击单词可以看解释和词根词缀拆解，点击句子开头的红点看到整句翻译和语法分析；遇到怎么都想不通的句子，上滑展开一个对话框，直接跟内置的 AI 语言模型对话请教。 今天的目标：把这个想法变成一份能落地的架构设计文档。  为什么要做这个 App？很多人喜欢通过看电影学英语，但实际操作起来很痛苦：  字幕一闪而过，来不及查词 切到词典 App 查词，电影被打断 很多词是俚语、口语，常规词典查不到 知道单词意思但看不懂整句——语法结构不懂 不知道哪些词应该重点学——屏幕上词汇太多  市面上有一些 App 做字幕翻译，但它们都有一个致命问题：依赖网络。在地铁上、飞机上、国外旅行时，没网就废了。 所以我决定做一个完全离线的解决方案——OCR 模型本地识别字幕，AI 语言模型本地运行在手机上。  需求拆解把想法拆成 8 条具体需求： 123456781. 一...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">吕务达</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">98</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/2026-02-12-full-pipeline-wrapup/" title="全链路打通：从标注数据到手机上跑起来的完整复盘">全链路打通：从标注数据到手机上跑起来的完整复盘</a><time datetime="2026-02-12T01:00:00.000Z" title="Created 2026-02-12 09:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/02/2026-02-02-thermal-throttling/" title="发热降频与功耗控制：移动端 LLM 推理的生存法则">发热降频与功耗控制：移动端 LLM 推理的生存法则</a><time datetime="2026-02-02T01:00:00.000Z" title="Created 2026-02-02 09:00:00">2026-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/23/2026-01-23-gguf-inference-optimization/" title="GGUF Q4 量化模型的推理速度与内存优化">GGUF Q4 量化模型的推理速度与内存优化</a><time datetime="2026-01-23T01:00:00.000Z" title="Created 2026-01-23 09:00:00">2026-01-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/13/2026-01-13-native-pointer-lifecycle/" title="Native 指针生命周期：assets 拷贝 GGUF、模型加载与安全释放">Native 指针生命周期：assets 拷贝 GGUF、模型加载与安全释放</a><time datetime="2026-01-13T01:00:00.000Z" title="Created 2026-01-13 09:00:00">2026-01-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/03/2026-01-03-jni-function-registration/" title="JNI 函数注册与 Kotlin external 声明：方法签名与类型映射">JNI 函数注册与 Kotlin external 声明：方法签名与类型映射</a><time datetime="2026-01-03T01:00:00.000Z" title="Created 2026-01-03 09:00:00">2026-01-03</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%94%B5%E5%BD%B1%E8%8B%B1%E8%AF%AD%E5%8A%A9%E6%89%8B/"><span class="card-category-list-name">电影英语助手</span><span class="card-category-list-count">30</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/TrOCR/" style="font-size: 1.1em; color: #999">TrOCR</a> <a href="/tags/Compose/" style="font-size: 1.18em; color: #999ca1">Compose</a> <a href="/tags/%E5%8A%9F%E8%80%97/" style="font-size: 1.1em; color: #999">功耗</a> <a href="/tags/%E5%A4%8D%E7%9B%98/" style="font-size: 1.1em; color: #999">复盘</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 1.1em; color: #999">架构设计</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.26em; color: #999fa8">深度学习</a> <a href="/tags/%E5%85%A8%E9%93%BE%E8%B7%AF/" style="font-size: 1.1em; color: #999">全链路</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E5%89%AA%E6%9E%9D/" style="font-size: 1.1em; color: #999">模型剪枝</a> <a href="/tags/ForegroundService/" style="font-size: 1.1em; color: #999">ForegroundService</a> <a href="/tags/%E6%82%AC%E6%B5%AE%E7%AA%97/" style="font-size: 1.1em; color: #999">悬浮窗</a> <a href="/tags/GPU-Delegate/" style="font-size: 1.1em; color: #999">GPU Delegate</a> <a href="/tags/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/" style="font-size: 1.1em; color: #999">线程安全</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 1.18em; color: #999ca1">性能优化</a> <a href="/tags/Kotlin/" style="font-size: 1.42em; color: #99a6b7">Kotlin</a> <a href="/tags/%E9%87%8F%E5%8C%96/" style="font-size: 1.1em; color: #999">量化</a> <a href="/tags/VTT/" style="font-size: 1.1em; color: #999">VTT</a> <a href="/tags/Prompt-Engineering/" style="font-size: 1.1em; color: #999">Prompt Engineering</a> <a href="/tags/NDK/" style="font-size: 1.34em; color: #99a3b0">NDK</a> <a href="/tags/MappedByteBuffer/" style="font-size: 1.1em; color: #999">MappedByteBuffer</a> <a href="/tags/opset/" style="font-size: 1.1em; color: #999">opset</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/" style="font-size: 1.26em; color: #999fa8">模型压缩</a> <a href="/tags/CRNN/" style="font-size: 1.34em; color: #99a3b0">CRNN</a> <a href="/tags/Windows/" style="font-size: 1.1em; color: #999">Windows</a> <a href="/tags/DataLoader/" style="font-size: 1.1em; color: #999">DataLoader</a> <a href="/tags/onnx-tf/" style="font-size: 1.1em; color: #999">onnx-tf</a> <a href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/" style="font-size: 1.18em; color: #999ca1">交叉编译</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/" style="font-size: 1.1em; color: #999">知识蒸馏</a> <a href="/tags/%E9%99%8D%E9%A2%91/" style="font-size: 1.1em; color: #999">降频</a> <a href="/tags/KSP/" style="font-size: 1.1em; color: #999">KSP</a> <a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 1.1em; color: #999">性能</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 1.1em; color: #999">经验</a> <a href="/tags/Android-UI/" style="font-size: 1.1em; color: #999">Android UI</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 1.1em; color: #999">大模型</a> <a href="/tags/llama-cpp/" style="font-size: 1.26em; color: #999fa8">llama.cpp</a> <a href="/tags/%E5%AD%97%E5%B9%95/" style="font-size: 1.26em; color: #999fa8">字幕</a> <a href="/tags/INT8/" style="font-size: 1.1em; color: #999">INT8</a> <a href="/tags/GGUF/" style="font-size: 1.18em; color: #999ca1">GGUF</a> <a href="/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%A4%B4/" style="font-size: 1.1em; color: #999">注意力头</a> <a href="/tags/PyTorch/" style="font-size: 1.5em; color: #99a9bf">PyTorch</a> <a href="/tags/ASS/" style="font-size: 1.1em; color: #999">ASS</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      <a class="card-more-btn" href="/archives/"
+            title="View More">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/02/">
+            <span class="card-archive-list-date">
+              February 2026
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              January 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/12/">
+            <span class="card-archive-list-date">
+              December 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/11/">
+            <span class="card-archive-list-date">
+              November 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              October 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              September 2025
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              August 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              July 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">30</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-06-07T10:14:49.461Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 吕务达</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5-b1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5-b1"></script><script src="/js/main.js?v=5.5.5-b1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
